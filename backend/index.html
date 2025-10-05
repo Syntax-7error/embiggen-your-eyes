@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        #map { height: 600px; }
+        #search-box { 
+            position: absolute; 
+            top: 10px; 
+            right: 10px; 
+            z-index: 1000; 
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div id="search-box">
+        <input type="text" id="search-input" placeholder="Search location..." />
+        <button onclick="searchLocation()">Search</button>
+    </div>
+    <div id="map"></div>
+
+    <script>
+        // Initialize map
+        const map = L.map('map').setView([0, 0], 2);
+
+        // Add tile layer
+        L.tileLayer('http://localhost:5000/tiles/{z}/{x}/{y}.png', {
+            maxZoom: 15,
+            minZoom: 0,
+            tileSize: 256
+        }).addTo(map);
+
+        // Search function
+        async function searchLocation() {
+            const query = document.getElementById('search-input').value;
+            
+            if (!query) {
+                alert('Please enter a location');
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:5000/search', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ query: query })
+                });
+
+                const data = await response.json();
+
+                if (data.status === 'success') {
+                    const { lat, lng, zoom, name } = data.location;
+                    
+                    // Fly to location
+                    map.flyTo([lat, lng], zoom, {
+                        duration: 2
+                    });
+
+                    // Add marker
+                    L.marker([lat, lng])
+                        .addTo(map)
+                        .bindPopup(name)
+                        .openPopup();
+
+                    console.log(`Found: ${name} at [${lat}, ${lng}]`);
+                } else {
+                    alert('Location not found: ' + data.message);
+                }
+            } catch (error) {
+                console.error('Search error:', error);
+                alert('Search failed. Please try again.');
+            }
+        }
+
+        // Allow Enter key to search
+        document.getElementById('search-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchLocation();
+            }
+        });
+    </script>
+</body>
+</html>
