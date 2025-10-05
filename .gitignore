@@ -1,0 +1,38 @@
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+package-lock.json # If you're using npm and want to ignore this, though often it's committed
+
+# Build output
+dist/
+dist-ssr/
+*.local # Local environment files, like .env.local
+
+# Editor directories and files
+.vscode/ # VS Code specific settings, except potentially extensions.json
+!.vscode/extensions.json # Optional: Include if you want to share recommended extensions
+.idea/ # IntelliJ IDEA specific settings
+.DS_Store # macOS specific
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw? # Vim swap files
+
+# Environment variables
+.env
+.env.*.local # All local environment files (e.g., .env.development.local, .env.production.local)
+
+# Testing
+coverage/ # Test coverage reports
+

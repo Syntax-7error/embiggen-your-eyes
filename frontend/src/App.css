@@ -1,0 +1,65 @@
+.background-video {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%; 
+  min-height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.search-container {
+  /* Move the positioning styles here! */
+
+  /* Now, we use Flexbox to arrange the items inside */
+  display: flex;
+  align-items: center;   /* Center items horizontally */
+  gap: 20px;
+  padding:40px 20px;/* Adds a nice space between the buttons and the search bar */
+}
+.search-bar {
+
+  /* Some nice styling */
+  width: 50%;
+  max-width: 600px;
+  padding: 16px;
+  font-size: 20px;
+  border-radius: 30px;
+  border: 1px solid #dfe1e5;
+  background: white;
+  color: #202124;
+}
+.search-modes button {
+  /* Styles for all buttons */
+  margin: 0 10px;
+  padding: 10px 20px;
+  border: 1px solid white;
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.search-modes button.active {
+  /* Styles for ONLY the active button */
+  background-color: white;
+  color: black;
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  padding: 20px;
+  width: 90%;
+  max-width: 1600px;
+  margin: 40px auto; /* Pushes it down from the search bar */
+}
+
+.image-grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Prevents images from stretching */
+  border-radius: 8px;
+}
