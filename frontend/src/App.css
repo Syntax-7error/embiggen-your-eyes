@@ -63,3 +63,30 @@
   object-fit: cover; /* Prevents images from stretching */
   border-radius: 8px;
 }
+
+.photo-detail-container {
+  width: 90%;
+  max-width: 900px;
+  margin: 40px auto;
+  text-align: center;
+  color: white;
+}
+
+.photo-detail-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.photo-info {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.back-link {
+  display: block;
+  margin-bottom: 20px;
+  color: #aaa;
+  text-decoration: none;
+  font-size: 18px;
+}
